@@ -11,6 +11,9 @@ body{
     width: 100vw;
     min-height: 100vh;
 }
+.titanic{
+    float: false;
+}
 canvas{
     
 
