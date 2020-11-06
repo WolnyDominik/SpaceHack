@@ -1,68 +1,54 @@
 class ScreenManager {
     constructor() {
-        this.current = 0;
         this.screenstack = new Array();
     }
 
     pushScreen(screen) {
         if (this.screenstack.length > 0)
-            this.current.pause();
+            this.screenstack[0].pause();
 
-        this.screenstack.push();
-        this.current = this.screenstack[this.screenstack.length - 1];
+        this.screenstack.unshift(screen);
     }
 
     popScreen() {
-        tmp = this.screenstack[this.screenstack.length - 1];
-
+        let tmp = this.screenstack.shift();
         if (this.screenstack.length > 0)
             tmp.soundFrame.pause();
-
-        this.screenstack.pop();
-        this.current = this.screenstack[this.screenstack.length - 1];
+        return tmp;
     }
 
     clearBuffer() {
-        this.screenstack = [];
-        this.current = this.screenstack.pop();
+        this.screenstack = new Array();
     }
 
     update() {
         this.current.update();
         if (this.screenstack.length > 0)
-            this.current.soundFrame.update();
+            this.screenstack[0].soundFrame.update();
     }
 
     draw() {
-        this.current.update();
+        this.screenstack[0].update();
     }
 
-    onClick() {
-        this.current.onClick(x, y, button);
+    onClick(x , y, button) {
+        this.screenstack[0].onClick(x, y, button);
     }
 
     onDrag(x, y, button) {
-        this.current.onDrag(x, y, button);
+        this.screenstack[0].onDrag(x, y, button);
     }
 
     onMove(x, y, button) {
-        this.current.onMove(x, y, button);
+        this.screenstack[0].onMove(x, y, button);
     }
 
     onKeyDown(key) {
-        this.current.onKeyDown(key);
+        this.screenstack[0].onKeyDown(key);
     }
 
     onKeyUp(key) {
-        this.current.onKeyUp(key);
+        this.screenstack[0].onKeyUp(key);
     }
 }
 
-document.onkeydown = function (e) {
-    console.log(e.keyCode);
-    screenManager.onKeyDown(e.keyCode);
-}
-
-document.onkeyup = function (e) {
-    screenManager.onKeyUp(e.keyCode);
-}
