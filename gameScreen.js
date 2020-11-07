@@ -38,12 +38,12 @@ class GameScreen extends Screen {
         for(let i in this.nodeType){
             for (let j in this.nodeType[i]){
                 console.log(i,j);
-                this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j]),this.nodeTask[i][j]>=0?()=>{
+                this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j],this.nodeTask[i][j]>=0?()=>{
                     console.log("ZADANIE ", this.nodeTask[i][j]);
                     this.focused = false;
                     this.containers[this.nodeTask[i][j]].active = true;
                     this.activeContainerId = this.nodeTask[i][j];
-                }:"");
+                }:""));
             }
         }
         
