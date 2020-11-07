@@ -27,6 +27,11 @@ class GameScreen extends Screen {
             }
         }
         /*this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
+        this.oreBreaker = new OreBreaker(() => {this.focus()});
+        this.content = new Array();
+        this.content.push()
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [this.oreBreaker], () => {}));
+        this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
         this.path.addNode(2, 1, new PathNode(pathType.ELEVATOR,2));
@@ -38,9 +43,8 @@ class GameScreen extends Screen {
             this.containers[0].active = true;
             this.activeContainerId = 0;
         }));*/
-        this.path.setNodePosition(2,0);
+        this.path.setNodePosition(3,0);
         this.player = new Player();
-
     }
 
     update() {
@@ -84,6 +88,7 @@ class GameScreen extends Screen {
             this.containers[j].active = false;
         }
     }
+    
     draw() {
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
@@ -103,8 +108,6 @@ class GameScreen extends Screen {
         
         this.path.draw();
         
-
-        
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
         this.player.draw(this.ticks/3.4);
@@ -121,6 +124,5 @@ class GameScreen extends Screen {
         }
 
         ctx.restore();
-
     }
 }
