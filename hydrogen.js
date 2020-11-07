@@ -53,7 +53,7 @@ class Hydrogen {
             if (this.output[0] >= 0.5) {
                 meassages.push(new Meassage((canvas.width - 300) / 2, (canvas.height - 128) / 2, 300, 128, "kaboom", "rgba(255,0,0,255)", this.fontsize, 5));
             } else {
-                meassages.push(new Meassage((canvas.width - 600) / 2, (canvas.height - 128) / 2, 600, 128, "Wypompowywanie wodoró rozpoczęte", "rgba(255,0,0,255)", this.fontsize, 5));
+                meassages.push(new Meassage((canvas.width - 800) / 2, (canvas.height - 128) / 2, 800, 128, "Wypompowywanie wodoró rozpoczęte", "rgba(255,0,0,255)", this.fontsize, 5));
             }
         }
     }
