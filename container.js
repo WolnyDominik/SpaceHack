@@ -36,6 +36,7 @@ class Container {
 
     update() {
         this.tick++;
+        // console.log(this.tick)
         for (let i = 0; i < this.content.length; i++) {
             if (this.content[i].update)
                 this.content[i].update();
@@ -44,18 +45,21 @@ class Container {
 
     onMove(mouse) {
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].onMove(mouse);
+            if (this.content[i].onMove) 
+                this.content[i].onMove(mouse);
         }
     }
 
     onClick(mouse) {
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].onClick(mouse);
+            if (this.content[i].onClick)
+                this.content[i].onClick(mouse);
         }
     }
     onKeyDown(key) {
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].onKeyDown(key);
+            if (this.content[i].onKeyDown)
+                this.content[i].onKeyDown(key);
         }
     }
 }

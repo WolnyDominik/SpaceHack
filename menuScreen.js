@@ -5,11 +5,18 @@ class MenuScreen extends Screen {
         this.image = new Image();
         this.image.src = "/src/img/background.png";
         this.menuBtns = new Array();
-        this.menuBtns.push(new Button(150, 150, 600, 55, "PLAY", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+        this.creds = new Container(undefined, undefined, 900, 600, "rgba(128,128,128,255)", [ new Creds ( () => {this.focus()} ) ], () => {})
+        this.focused = true;
+        this.menuBtns.push(new Button(150, 100, 600, 55, "PLAY", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
             screenManager.pushScreen(gameScreen)
         }));
-        this.menuBtns.push(new Button(150, 300, 600, 55, "OPTIONS", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-            
+        this.menuBtns.push(new Button(150, 200, 600, 55, "CHOOSE PLAYER", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+            // this.creds.active = true;
+            // this.focused = false;
+        }));
+        this.menuBtns.push(new Button(150, 300, 600, 55, "CREDITS", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+            this.focused = false;
+            this.creds.active = true;
         }));
 
         this.animate = true;
@@ -21,24 +28,32 @@ class MenuScreen extends Screen {
         this.bckgrdAudio.volume = 0.05;
         this.bckgrdAudio.loop = true;
         this.bckgrdAudio.play();
-
     }
 
     onClick(x, y, buttons) {
         super.onClick(x, y, buttons);
-        for (let j = 0; j < this.menuBtns.length; j++) {
-            this.menuBtns[j].onClick(x, y, buttons);
-        }
+        if (this.focused)
+            for (let j = 0; j < this.menuBtns.length; j++)
+                this.menuBtns[j].onClick(x, y, buttons);
+    }
+
+    onKeyDown(key) {
+        super.onKeyDown(key);
+        if (!this.focused)
+            this.creds.onKeyDown(key);
+    }
+
+    focus() {
+        this.focused = true;
+        this.creds.active = false;
 
     }
 
     onMove(x, y, buttons) {
         super.onMove(x, y);
-
-        for (let j = 0; j < this.menuBtns.length; j++) {
-            this.menuBtns[j].onMove(x, y);
-
-        }
+        if (this.focused)
+            for (let j = 0; j < this.menuBtns.length; j++)
+                this.menuBtns[j].onMove(x, y);
     }
 
     update() {
@@ -49,6 +64,8 @@ class MenuScreen extends Screen {
                 this.animate = false;
                 this.alpha = 1;
             this.alpha = this.ticks/64;
+        if (!this.focused)
+            this.creds.update();
     }
 
     draw() {
@@ -66,6 +83,9 @@ class MenuScreen extends Screen {
         for (let j = 0; j < this.menuBtns.length; j++) {
             this.menuBtns[j].draw();
         }
+
+        if (!this.focused)
+            this.creds.draw();
         ctx.restore();
 
     }
