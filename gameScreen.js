@@ -26,7 +26,7 @@ class GameScreen extends Screen {
             [133, 64, 66, 66, 66, 67,   130,130,130,130,  130, 131,  2,   2,  2,  2,     2,132, 66,    66,64+32,  133],
             [133, 64, 66, 66, 66, 66,     4,130,130,130,  130,4+32, 66,  66, 66, 66,    67,130,130,   130,128+32, 133],
             [133,  0,  2,  2,  2,  2,   132, 66, 66, 66,64+32, 133,133, 133,133,133,   133,133,133,   133,   133, 133]];
-            
+
         for(let i in this.nodeType){
             for (let j in this.nodeType[i]){
                 console.log(i,j);
@@ -50,7 +50,7 @@ class GameScreen extends Screen {
             this.containers[0].active = true;
             this.activeContainerId = 0;
         }));*/
-        this.path.setNodePosition(3,0);
+        this.path.setNodePosition(4,0);
         this.player = new Player();
     }
 
