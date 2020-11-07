@@ -13,6 +13,8 @@ class Button{
         this.activated = false;
         this.hover = false;
         this.callback = callback;
+        this.clickSound = new Audio("/src/sound/click.mp3");
+        this.clickSound.volume = 0.2;
     }
 
     draw(){
@@ -43,6 +45,7 @@ class Button{
             //(prevButtons&1) == 0
         ) {
             this.activated=true;
+            this.clickSound.play();
             if (this.callback) this.callback();
         }
         else if ((buttons&1) == 0){

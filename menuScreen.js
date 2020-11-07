@@ -3,11 +3,16 @@ class MenuScreen extends Screen {
         super();
         this.ticks = 0;
         this.image = new Image();
-        this.image.src = "/src/background.png";
+        this.image.src = "/src/img/background.png";
         this.menuBtns = new Array();
         this.menuBtns.push(new Button(150, 150, 600, 55, "PLAY" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 40, ()=>{console.log("play")}));
         this.menuBtns.push(new Button(150, 300, 600, 55, "OPTIONS" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 40, ()=>{this.activateContainer(0)}));
         this.focused = true;
+
+        this.bckgrdAudio = new Audio("src/sound/title.mp3");
+        this.bckgrdAudio.volume = 0.05;
+        this.bckgrdAudio.loop = true;
+        this.bckgrdAudio.play();
         
         this.containers = new Array();
         this.btns = new Array();
@@ -87,6 +92,11 @@ class MenuScreen extends Screen {
         
         ctx.restore();
       
+    }
+
+    pause() {
+        super.pause()
+        this.bckgrdAudio.pause()
     }
 }
 
