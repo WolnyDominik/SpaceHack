@@ -39,13 +39,14 @@ class GameScreen extends Screen {
     }
 
     onKeyDown(key) {
-        super.onKeyDown(key);
-        if(key==73){
-            this.focus();
+        if(key==13 && !this.keyState[13]){
+            if (this.focused) {
+                this.path.onKeyDown(key);
+            } else {
+                this.focus();
+            }
         }
-        else if (this.focused) {
-            this.path.onKeyDown(key);
-        }
+        this.keyState[key] = true;
     }
 
     onClick(x, y, buttons) {
@@ -89,6 +90,7 @@ class GameScreen extends Screen {
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
         this.player.draw(this.ticks/3.4);
+        //3.4
         ctx.restore();
         //ctx.fillStyle = "#f00";
         //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
