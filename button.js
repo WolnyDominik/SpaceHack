@@ -44,6 +44,7 @@ class Button{
             (mouse.prevButtons&1) == 0
         ) {
             this.activated=true;
+            if (this.callback) this.callback();
         }
         else if ((mouse.buttons&1) == 0){
             this.activated=false;

@@ -5,8 +5,8 @@ class MenuScreen extends Screen {
         this.image = new Image();
         this.image.src = "/src/background.png";
         this.Mbut = new Array();
-        this.Mbut.push(new Button(150, 150, 600, 55, "PLAY" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 45));
-        this.Mbut.push(new Button(150, 300, 600, 55, "OPTIONS" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 45));
+        this.Mbut.push(new Button(150, 150, 600, 55, "PLAY" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 45, ()=>{console.log("play")}));
+        this.Mbut.push(new Button(150, 300, 600, 55, "OPTIONS" , "rgba(70,100,168,255)" , "rgba(90,120,188,255)" , "rgba(240,128,0,255)" , "rgba(255,255,255,225", 45, ()=>{console.log("options")}));
     }
 
     onClick(x, y, buttons){
@@ -16,7 +16,7 @@ class MenuScreen extends Screen {
         }    
     }
 
-    onMove(x, y) {
+    onMove(x, y, buttons) {
         super.onMove(x, y);
         for (let j = 0; j < this.Mbut.length; j++) {
             this.Mbut[j].checkHover(x, y);
