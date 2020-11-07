@@ -14,6 +14,7 @@ class GameScreen extends Screen {
         this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR));
         this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR));
         this.path.addNode(4, 0, new PathNode(pathType.ELEVATOR));
+        this.containers = new Array();
     }
 
     update(){
