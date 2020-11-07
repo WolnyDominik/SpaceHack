@@ -18,6 +18,7 @@ class Switch {
         this.turning = false;
         this.size = {width: 32, height: 32};
     }
+    update(){}
     draw() {
         ctx.save();
         ctx.translate(this.x+this.width/2,this.y+this.height/2);
