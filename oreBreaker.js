@@ -10,6 +10,8 @@ class OreBreaker {
         this.callback = callback;
         this.tick = 0;
         this.done = false;
+        this.audio = new Audio("/src/sound/mine.mp3");
+        this.audio.volume = 0.5;
     }
 
     update() {
@@ -19,6 +21,7 @@ class OreBreaker {
         if (this.done) {
             if (this.callback && this.tick >= 120) {
                 this.tick = 0;
+                this.done = false;
                 this.callback();
             }
         }
@@ -31,10 +34,12 @@ class OreBreaker {
             mouse.y < this.y + this.height &&
             mouse.buttons&1 == 1 
         ){
-            this.completion += 20;
-            this.tick = 0
-            if (this.completion >= 100)
-            {
+            if (!this.done) {
+                this.completion += 20;
+                this.tick = 0;
+                this.audio.play();
+            }
+            if (this.completion >= 100) {
                 this.completion = 0;
                 this.tick = 0;
                 this.done = true;
@@ -45,7 +50,9 @@ class OreBreaker {
     onMove(mouse) {
         
     }
-
+    onKeyDown(key) {
+    
+    }
     draw() {
         ctx.save();
 
