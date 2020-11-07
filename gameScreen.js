@@ -22,6 +22,7 @@ class GameScreen extends Screen {
             this.containers[0].active = true;
             this.activeContainerId = 0;
         }));
+        this.player = new Player();
 
     }
 
@@ -30,6 +31,7 @@ class GameScreen extends Screen {
         this.ticks++;
         if (this.focused) {
             this.path.update(this.keyState);
+            this.player.update(this.keyState);
         }
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].update();
@@ -72,17 +74,30 @@ class GameScreen extends Screen {
         ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         ctx.restore();
+        
+        ctx.save();
 
+        let tmp = this.path.getPlayerPosition();
+        ctx.translate(canvas.width/2,canvas.height/2);
+        ctx.scale(8,8);
+        ctx.translate(-tmp.x,-tmp.y-32);
+        
         this.path.draw();
+        
 
         ctx.fillStyle = "#f00";
-        let tmp = this.path.getPlayerPosition();
-        ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
+        ctx.save();
+        ctx.translate(tmp.x-32,tmp.y);
+        this.player.draw(this.ticks/3.3);
+        ctx.restore();
+        //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
 
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].draw();
         }
         //ctx.fillRect(0,0,20,20);
+        
+        ctx.restore();
 
         ctx.restore();
 
