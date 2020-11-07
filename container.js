@@ -37,15 +37,15 @@ class Container {
         this.tick++;
     }
 
-    onMove(x, y, buttons) {
+    onMove(mouse) {
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].onMove(x, y, buttons);
+            this.content[i].onMove(mouse);
         }
     }
 
-    onClick(x, y, buttons) {
+    onClick(mouse) {
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].onClick(x, y, buttons);
+            this.content[i].onClick(mouse);
         }
     }
 }

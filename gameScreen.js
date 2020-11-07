@@ -8,7 +8,7 @@ class GameScreen extends Screen {
         this.activeContainerId = 0;
         this.path = new Path();
         this.containers = new Array();
-        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [], () => {}));
+        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
         this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
@@ -17,7 +17,6 @@ class GameScreen extends Screen {
         this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR,2));
         this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR,2));
         this.path.addNode(4, 0, new PathNode(pathType.ELEVATOR,2, () => {
-            console.log("options");
             this.focused = false;
             this.containers[0].active = true;
             this.activeContainerId = 0;
@@ -50,13 +49,15 @@ class GameScreen extends Screen {
     }
 
     onClick(x, y, buttons) {
+        super.onClick(x,y,buttons);
         if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].onClick(x, y, buttons);
+            this.containers[this.activeContainerId].onClick(this.mouse);
         }
     }
     onMove(x, y, buttons) {
+        super.onMove(x,y,buttons);
         if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].onMove(x, y, buttons);
+            this.containers[this.activeContainerId].onMove(this.mouse);
         }
     }
 
