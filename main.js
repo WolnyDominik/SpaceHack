@@ -6,7 +6,8 @@ function main() {
     screenManager = new ScreenManager();
     gameScreen = new GameScreen();
     menuScreen = new MenuScreen();
-    screenManager.pushScreen(menuScreen);
+    splashScreen = new SplashScreen();
+    screenManager.pushScreen(splashScreen);
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
     tilesheet = new Image();

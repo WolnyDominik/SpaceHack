@@ -12,24 +12,15 @@ class MenuScreen extends Screen {
             this.activateContainer(0)
         }));
 
-
         this.animate = true;
         this.velocity = 10;
         this.y = 720;
         this.alpha = 0;
 
-
         this.bckgrdAudio = new Audio("src/sound/title.mp3");
         this.bckgrdAudio.volume = 0.05;
         this.bckgrdAudio.loop = true;
         this.bckgrdAudio.play();
-
-
-        //    this.activeContainerId = 0;
-        //    this.btns = new Array();
-        // this.btns.push(new Button(0, 0, 100, 55, "OK", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-        //    this.focus()
-        //   }));
 
     }
 
@@ -50,8 +41,6 @@ class MenuScreen extends Screen {
         }
     }
 
-
-
     update() {
         this.ticks++;
         if(this.animate)
@@ -61,8 +50,6 @@ class MenuScreen extends Screen {
                 this.alpha = 1;
             this.alpha = this.ticks/64;
     }
-
-
 
     draw() {
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
