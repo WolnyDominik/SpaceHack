@@ -78,6 +78,8 @@ class GameScreen extends Screen {
         if (this.focused) {
             this.path.update(this.keyState);
             this.player.update(this.keyState);
+        } else {
+            this.player.update([]);
         }
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].update();
