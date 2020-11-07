@@ -20,10 +20,6 @@ class Screen {
         return false;
     }
 
-    onDrag(x, y, button) {
-
-    }
-
     onMove(x, y) {
         this.mouse.x = x;
         this.mouse.y = y;

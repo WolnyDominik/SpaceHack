@@ -1,5 +1,5 @@
 class Button{
-    constructor(x,y,width,height,text,prim,sec,act,textcolor,fontsize){
+    constructor(x,y,width,height,text,prim,sec,act,textcolor,fontsize,callback){
         this.x = x
         this.y = y
         this.width = width
@@ -8,18 +8,27 @@ class Button{
         this.prim = prim
         this.sec = sec
         this.act = act
-        this.color = this.prim
         this.textcolor = textcolor
         this.fontsize=fontsize
         this.activated = false
+        this.hover = false
+        this.callback = callback
     }
 
     draw(){
         ctx.save()
         
-        ctx.fillStyle = this.sec;
+        //ctx.fillStyle = this.sec;
+        ctx.fillStyle = "rgba(128,128,128,255)";
         ctx.fillRect(this.x - 3, this.y - 3, this.width, this.height);
-        ctx.fillStyle = this.color;
+        
+        if (this.activated)
+            ctx.fillStyle = this.act;
+        else if (this.hover)
+            ctx.fillStyle = this.sec;
+        else
+            ctx.fillStyle = this.prim;
+        
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.font=this.fontsize+"px 'Press Start 2P'";
         ctx.fillStyle = this.textcolor;
@@ -33,32 +42,24 @@ class Button{
         if (this.checkCoords(x, y) &&
             buttons&1 == 1
         ) {
-            this.color = this.act;
             this.activated=true;
         }
-        else{
+        else {
             this.activated=false;
-            this.color = this.prim;
-        }     
+        }
     }
 
     checkCoords(x, y) {
-        if (x > this.x && 
+        return (x > this.x && 
             x < this.x + this.width && 
             y > this.y && 
             y < this.y + this.height
-        ) {
-            return true;
-        }
-        
-        return false;
+        );
     }
 
     checkHover(x, y) {
-        if(this.checkCoords(x, y) && !this.activated)
-            this.color = this.sec;
-
-        else 
-            this.color = this.prim;
+        this.hover = this.checkCoords(x, y);
+        if (!this.hover)
+            this.activated = false;
     }
 }

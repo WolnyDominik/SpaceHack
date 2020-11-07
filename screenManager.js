@@ -31,12 +31,8 @@ class ScreenManager {
         this.screenstack[0].draw();
     }
 
-    onClick(x , y, button) {
-        this.screenstack[0].onClick(x, y, button);
-    }
-
-    onDrag(x, y, button) {
-        this.screenstack[0].onDrag(x, y, button);
+    onClick(x , y, buttons) {
+        this.screenstack[0].onClick(x, y, buttons);
     }
 
     onMove(x, y) {
