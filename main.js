@@ -1,16 +1,19 @@
-var deltaTime, now, time = 0, last = Date.now();
+var deltaTime, now, time = 0,
+    last = Date.now();
+    var meassages = new Array;
+
 function main() {
     screenManager = new ScreenManager();
     gameScreen = new GameScreen();
     menuScreen = new MenuScreen();
+    gameScreen = new GameScreen();
     screenManager.pushScreen(menuScreen);
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
     tilesheet = new Image();
-    canvas.width=1280;
-    canvas.height=720;
+    canvas.width = 1280;
+    canvas.height = 720;
     ctx.imageSmoothingEnabled = false;
-
     tick();
 }
 
@@ -21,8 +24,8 @@ function tick() {
     time += deltaTime;
     screenManager.update();
     screenManager.draw();
+    meassageManager();
     requestAnimationFrame(tick);
-
 }
 console.log("RED SUS");
 main();
@@ -36,7 +39,7 @@ document.onkeyup = function (e) {
 }
 
 canvas.oncontextmenu = function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
 }
 
 canvas.onmousemove = function (e) {
