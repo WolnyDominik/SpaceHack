@@ -1,24 +1,23 @@
 class Button{
     constructor(x,y,width,height,text,prim,sec,act,textcolor,fontsize,callback){
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
-        this.text = text
-        this.prim = prim
-        this.sec = sec
-        this.act = act
-        this.textcolor = textcolor
-        this.fontsize=fontsize
-        this.activated = false
-        this.hover = false
-        this.callback = callback
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.text = text;
+        this.prim = prim;
+        this.sec = sec;
+        this.act = act;
+        this.textcolor = textcolor;
+        this.fontsize=fontsize;
+        this.activated = false;
+        this.hover = false;
+        this.callback = callback;
     }
 
     draw(){
         ctx.save()
         
-        //ctx.fillStyle = this.sec;
         ctx.fillStyle = "rgba(128,128,128,255)";
         ctx.fillRect(this.x - 3, this.y - 3, this.width, this.height);
         
@@ -33,20 +32,20 @@ class Button{
         ctx.font=this.fontsize+"px 'Press Start 2P'";
         ctx.fillStyle = this.textcolor;
         ctx.textAlign = "center";
-        ctx.fillText(this.text ,this.x+this.width/2 ,this.y+this.height );
+        ctx.fillText(this.text ,this.x+this.width/2 ,this.y+this.height/2+this.fontsize/2 );
         
         ctx.restore()
     }
 
-    checkClick(mouse){
-        if (this.checkCoords(mouse.x, mouse.y) &&
-            (mouse.buttons&1) == 1 &&
-            (mouse.prevButtons&1) == 0
+    onClick(x, y, buttons){
+        if (this.checkCoords(x, y) &&
+            (buttons&1) == 1 //&&
+            //(prevButtons&1) == 0
         ) {
             this.activated=true;
             if (this.callback) this.callback();
         }
-        else if ((mouse.buttons&1) == 0){
+        else if ((buttons&1) == 0){
             this.activated=false;
         }
     }
@@ -59,7 +58,7 @@ class Button{
         );
     }
 
-    checkHover(x, y) {
+    onMove(x, y, buttons) {
         this.hover = this.checkCoords(x, y);
         if (!this.hover)
             this.activated = false;
