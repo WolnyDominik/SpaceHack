@@ -3,7 +3,7 @@ class GameScreen extends Screen {
         super();
         this.ticks = 0;
         this.image = new Image();
-        this.image.src = "/src/background.png";
+        this.image.src = "/src/img/background.png";
         
         this.path = new Path();
         this.path.addNode(0, 0, new PathNode(pathType.DEFAULT));
