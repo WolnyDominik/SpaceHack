@@ -86,9 +86,6 @@ class GameScreen extends Screen {
     onKeyDown(key) {
         if (this.focused) 
             this.path.onKeyDown(key, this.keyState)
-        if(key==13 && !this.keyState[13] && !this.focused){
-                this.focus();
-        }
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].onKeyDown(key);
         }
