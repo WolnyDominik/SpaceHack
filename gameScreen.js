@@ -91,13 +91,13 @@ class GameScreen extends Screen {
         this.player.draw(this.ticks/3.3);
         ctx.restore();
         //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
-
-        if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].draw();
-        }
         //ctx.fillRect(0,0,20,20);
         
         ctx.restore();
+        
+        if (this.containers[this.activeContainerId].active) {
+            this.containers[this.activeContainerId].draw();
+        }
 
         ctx.restore();
 
