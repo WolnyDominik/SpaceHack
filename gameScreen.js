@@ -13,7 +13,7 @@ class GameScreen extends Screen {
         this.content.push();
         this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [new OreBreaker(() => {this.focus()})], () => {}));
-        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [new Hydrogen(0,0)], () => {}));
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)", [new Hydrogen(0,0,() => {this.focus()})]));
         this.nodeType=[
             [0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0,0],
             [0,2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2,0],
@@ -73,7 +73,7 @@ class GameScreen extends Screen {
 
     update() {
         if (!this.focused)
-            console.log("ASDASDASDASSAD");
+        //    console.log("ASDASDASDASSAD");
         this.ticks++;
         if (this.focused) {
             this.path.update(this.keyState);
