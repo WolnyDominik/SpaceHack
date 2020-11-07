@@ -20,9 +20,25 @@ class Path {
         if (!this.nodeMap[y]) this.nodeMap[y] = [];
         this.nodeMap[y][x] = pathNode;
     }
-    onKeyDown(key) {
+    onKeyDown(key, keyState) {
         if (key == 13 && this.nodeMap[this.position.y][this.position.x].callback)
             this.nodeMap[this.position.y][this.position.x].callback();
+        if (!keyState[87] && this.nodeMap[this.position.y-1] && key==87) {
+            if (this.nodeMap[this.position.y][this.position.x].type == pathType.ELEVATOR && this.nodeMap[this.position.y-1][this.position.x]) {
+                if (this.nodeMap[this.position.y-1][this.position.x].type == pathType.ELEVATOR) {
+                    this.position.y--;
+                    this.offset = {x: 0, y: 0};
+                }
+            }
+        }
+        if (!keyState[83] && this.nodeMap[this.position.y+1] && key==83) {
+            if (this.nodeMap[this.position.y][this.position.x].type == pathType.ELEVATOR && this.nodeMap[this.position.y+1][this.position.x]) {
+                if (this.nodeMap[this.position.y+1][this.position.x].type == pathType.ELEVATOR) {
+                    this.position.y++;
+                    this.offset = {x: 0, y: 0};
+                }
+            }
+        }    
     }
     draw() {
         for (let y in screenManager.screenstack[0].path.nodeMap) {
@@ -35,22 +51,7 @@ class Path {
         }
     }
     update(keyState) {
-        if (keyState[87] && this.nodeMap[this.position.y-1]) {
-            if (this.nodeMap[this.position.y][this.position.x].type == pathType.ELEVATOR && this.nodeMap[this.position.y-1][this.position.x]) {
-                if (this.nodeMap[this.position.y-1][this.position.x].type == pathType.ELEVATOR) {
-                    this.position.y--;
-                    this.offset = {x: 0, y: 0};
-                }
-            }
-        }
-        if (keyState[83] && this.nodeMap[this.position.y+1]) {
-            if (this.nodeMap[this.position.y][this.position.x].type == pathType.ELEVATOR && this.nodeMap[this.position.y+1][this.position.x]) {
-                if (this.nodeMap[this.position.y+1][this.position.x].type == pathType.ELEVATOR) {
-                    this.position.y++;
-                    this.offset = {x: 0, y: 0};
-                }
-            }
-        }
+       
         if (keyState[65]) {
             this.offset.x -= deltaTime*this.speed;
             if (this.offset.x < -this.size.width/2) {
