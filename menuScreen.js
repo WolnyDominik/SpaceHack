@@ -13,6 +13,12 @@ class MenuScreen extends Screen {
         }));
 
 
+        this.animate = true;
+        this.velocity = 10;
+        this.y = 720;
+        this.alpha = 0;
+
+
         this.bckgrdAudio = new Audio("src/sound/title.mp3");
         this.bckgrdAudio.volume = 0.05;
         this.bckgrdAudio.loop = true;
@@ -48,6 +54,12 @@ class MenuScreen extends Screen {
 
     update() {
         this.ticks++;
+        if(this.animate)
+            this.y -= this.velocity;
+            if(this.y <= 0)
+                this.animate = false;
+                this.alpha = 1;
+            this.alpha = this.ticks/64;
     }
 
 
@@ -55,13 +67,15 @@ class MenuScreen extends Screen {
     draw() {
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
-
+        ctx.globalAlpha = this.alpha;
+        
         ctx.save();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         ctx.restore();
-
+        
+        ctx.translate(0, this.y)
         for (let j = 0; j < this.menuBtns.length; j++) {
             this.menuBtns[j].draw();
         }
