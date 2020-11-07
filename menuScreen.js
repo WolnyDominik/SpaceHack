@@ -11,66 +11,46 @@ class MenuScreen extends Screen {
         this.menuBtns.push(new Button(150, 300, 600, 55, "OPTIONS", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
             this.activateContainer(0)
         }));
-        this.focused = true;
+
 
         this.bckgrdAudio = new Audio("src/sound/title.mp3");
         this.bckgrdAudio.volume = 0.05;
         this.bckgrdAudio.loop = true;
         this.bckgrdAudio.play();
-        
-        this.containers = new Array();
-        this.activeContainerId = 0;
-        this.btns = new Array();
-        this.btns.push(new Button(0, 0, 100, 55, "OK", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-            this.focus()
-        }));
-        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", this.btns, () => {}));
+
+
+        //    this.activeContainerId = 0;
+        //    this.btns = new Array();
+        // this.btns.push(new Button(0, 0, 100, 55, "OK", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+        //    this.focus()
+        //   }));
+
     }
 
     onClick(x, y, buttons) {
-        if (this.focused) {
-            super.onClick(x, y, buttons);
-            for (let j = 0; j < this.menuBtns.length; j++) {
-                this.menuBtns[j].onClick(x, y, buttons);
-            }
+        super.onClick(x, y, buttons);
+        for (let j = 0; j < this.menuBtns.length; j++) {
+            this.menuBtns[j].onClick(x, y, buttons);
         }
-        if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].onClick(x, y, buttons);
-        }
+
     }
 
     onMove(x, y, buttons) {
         super.onMove(x, y);
-        if (this.focused) {
-            for (let j = 0; j < this.menuBtns.length; j++) {
-                this.menuBtns[j].onMove(x, y);
-            }
-        }
-        if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].onMove(x, y, buttons);
+
+        for (let j = 0; j < this.menuBtns.length; j++) {
+            this.menuBtns[j].onMove(x, y);
+
         }
     }
 
-    focus() {
-        this.focused = true;
-        for (let j = 0; j < this.containers.length; j++) {
-            this.containers[j].active = false;
-        }
-    }
+
 
     update() {
         this.ticks++;
-        if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].update();
-        }
     }
 
-    activateContainer(i) {
-        console.log("options");
-        this.focused = false;
-        this.containers[i].active = true;
-        this.activeContainerId = i;
-    }
+
 
     draw() {
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
@@ -85,10 +65,6 @@ class MenuScreen extends Screen {
         for (let j = 0; j < this.menuBtns.length; j++) {
             this.menuBtns[j].draw();
         }
-        if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].draw();
-        }
-
         ctx.restore();
 
     }

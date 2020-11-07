@@ -12,7 +12,7 @@ class Container {
         for (let i = 0; i < this.content.length; i++) {
             this.content[i].x += canvas.width/2 + this.x - this.content[i].width/2;
             this.content[i].y += canvas.height/2 + this.y - this.content[i].height/2;
-        }
+       }
     }
 
     draw() {
