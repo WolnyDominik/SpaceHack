@@ -18,7 +18,7 @@ class Button{
     }
 
     draw(){
-        ctx.save()
+        ctx.save();
         
         ctx.fillStyle = "rgba(128,128,128,255)";
         ctx.fillRect(this.x - 3, this.y - 3, this.width, this.height);
