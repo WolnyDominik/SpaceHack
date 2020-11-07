@@ -21,7 +21,7 @@ class Path {
         this.nodeMap[y][x] = pathNode;
     }
     onKeyDown(key, keyState) {
-        if (key == 13 && this.nodeMap[this.position.y][this.position.x].callback)
+        if (key == 13 && !keyState[13] && this.nodeMap[this.position.y][this.position.x].callback)
             this.nodeMap[this.position.y][this.position.x].callback();
         if (!keyState[87] && this.nodeMap[this.position.y-1] && key==87) {
             if (this.nodeMap[this.position.y][this.position.x].type == pathType.ELEVATOR && this.nodeMap[this.position.y-1][this.position.x]) {

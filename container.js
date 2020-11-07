@@ -27,7 +27,8 @@ class Container {
         ctx.restore();
 
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].draw();
+            if (this.content[i].draw)
+                this.content[i].draw();
         }
 
         ctx.restore();
@@ -36,7 +37,8 @@ class Container {
     update() {
         this.tick++;
         for (let i = 0; i < this.content.length; i++) {
-            this.content[i].update();
+            if (this.content[i].update)
+                this.content[i].update();
         }
     }
 
