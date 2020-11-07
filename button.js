@@ -38,13 +38,14 @@ class Button{
         ctx.restore()
     }
 
-    checkClick(x, y, buttons){
-        if (this.checkCoords(x, y) &&
-            buttons&1 == 1
+    checkClick(mouse){
+        if (this.checkCoords(mouse.x, mouse.y) &&
+            (mouse.buttons&1) == 1 &&
+            (mouse.prevButtons&1) == 0
         ) {
             this.activated=true;
         }
-        else {
+        else if ((mouse.buttons&1) == 0){
             this.activated=false;
         }
     }

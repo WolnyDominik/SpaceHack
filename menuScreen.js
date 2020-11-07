@@ -12,7 +12,7 @@ class MenuScreen extends Screen {
     onClick(x, y, buttons){
         super.onClick(x, y, buttons);
         for (let j = 0; j < this.Mbut.length; j++) {
-            this.Mbut[j].checkClick(x, y, buttons);
+            this.Mbut[j].checkClick(this.mouse);
         }    
     }
 
