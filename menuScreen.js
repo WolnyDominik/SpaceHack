@@ -17,7 +17,6 @@ class MenuScreen extends Screen {
     }
 
     onMove(x, y) {
-        console.log("KUPA");
         super.onMove(x, y);
         for (let j = 0; j < this.Mbut.length; j++) {
             this.Mbut[j].checkHover(x, y);

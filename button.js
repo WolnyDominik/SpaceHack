@@ -55,7 +55,6 @@ class Button{
     }
 
     checkHover(x, y) {
-        console.log("KEK");
         if(this.checkCoords(x, y) && !this.activated)
             this.color = this.sec;
 
