@@ -9,14 +9,14 @@ class GameScreen extends Screen {
         this.path = new Path();
         this.containers = new Array();
         this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [], () => {}));
-        this.path.addNode(0, 0, new PathNode(pathType.DEFAULT));
-        this.path.addNode(1, 0, new PathNode(pathType.DEFAULT));
-        this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR));
-        this.path.addNode(2, 1, new PathNode(pathType.ELEVATOR));
-        this.path.addNode(3, 0, new PathNode(pathType.WALL));
-        this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR));
-        this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR));
-        this.path.addNode(4, 0, new PathNode(pathType.ELEVATOR, () => {
+        this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
+        this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
+        this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
+        this.path.addNode(2, 1, new PathNode(pathType.ELEVATOR,2));
+        this.path.addNode(3, 0, new PathNode(pathType.WALL,1));
+        this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR,2));
+        this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR,2));
+        this.path.addNode(4, 0, new PathNode(pathType.ELEVATOR,2, () => {
             console.log("options");
             this.focused = false;
             this.containers[0].active = true;
@@ -79,17 +79,18 @@ class GameScreen extends Screen {
 
         let tmp = this.path.getPlayerPosition();
         ctx.translate(canvas.width/2,canvas.height/2);
-        ctx.scale(8,8);
-        ctx.translate(-tmp.x,-tmp.y-32);
+        ctx.scale(6,6);
+        ctx.translate(-tmp.x,-tmp.y-4);
         
         this.path.draw();
         
 
-        ctx.fillStyle = "#f00";
+        
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
-        this.player.draw(this.ticks/3.3);
+        this.player.draw(this.ticks/3.4);
         ctx.restore();
+        //ctx.fillStyle = "#f00";
         //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
         //ctx.fillRect(0,0,20,20);
         

@@ -18,8 +18,9 @@ class Player {
     }
     draw(ticks) {
         ctx.save();
+        ctx.translate(0,-18);
         ctx.translate(32,64);
-        if (this.angle) ctx.translate(0,Math.cos(ticks)*5);
+        if (this.angle) ctx.translate(0,-Math.abs(Math.cos(ticks)*5));
         ctx.rotate(this.angle*Math.sin(ticks));
         if (this.dir) ctx.scale(-1,1);
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
