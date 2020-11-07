@@ -6,7 +6,6 @@ function main() {
     screenManager = new ScreenManager();
     gameScreen = new GameScreen();
     menuScreen = new MenuScreen();
-    gameScreen = new GameScreen();
     screenManager.pushScreen(menuScreen);
     canvas = document.querySelector('canvas');
     ctx = canvas.getContext('2d');
