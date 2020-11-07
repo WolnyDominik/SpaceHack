@@ -7,8 +7,12 @@ class GameScreen extends Screen {
         this.focused = true;
         this.activeContainerId = 0;
         this.path = new Path();
+
         this.containers = new Array();
+        this.content= new Array();
+        this.content.push();
         this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [new OreBreaker(() => {this.focus()})], () => {}));
         this.nodeType=[
             [0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0,0],
             [0,2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2,0],
@@ -24,20 +28,28 @@ class GameScreen extends Screen {
         this.nodeTexture=[
             [197,197,197,196,192,193,192+32,195,194,194,  194, 195,192, 193,193,193,192+32,194,194,196+32,  197,  197],
             [133, 64, 66, 66, 66, 67,   130,130,130,130,  130, 131,  2,   2,  2,  2,     2,132, 66,    66,64+32,  133],
-            [133, 64, 66, 66, 66, 66,     4,130,130,130,  130,4+32, 66,  66, 66, 66,    67,130,130,   130,128+32, 133],
+            [133, 128, 130, 130, 130, 130,  68,2,2,2,  2,132, 66,  66, 66, 66,    67,130,130,   130,128+32, 133],
             [133,  0,  2,  2,  2,  2,   132, 66, 66, 66,64+32, 133,133, 133,133,133,   133,133,133,   133,   133, 133]];
-
+        this.nodeTask=[
+            [-1,-1,-1,-1,-1, 0, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]]
         for(let i in this.nodeType){
             for (let j in this.nodeType[i]){
                 console.log(i,j);
-                this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j]),);
+                this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j]),this.nodeTask[i][j]>=0?()=>{
+                    console.log("ZADANIE ", this.nodeTask[i][j]);
+                    this.focused = false;
+                    this.containers[this.nodeTask[i][j]].active = true;
+                    this.activeContainerId = this.nodeTask[i][j];
+                }:"");
             }
         }
+        
         /*this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
-        this.oreBreaker = new OreBreaker(() => {this.focus()});
-        this.content = new Array();
-        this.content.push()
-        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [this.oreBreaker], () => {}));
+        
+        
         this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
