@@ -51,4 +51,9 @@ class Container {
             this.content[i].onClick(mouse);
         }
     }
+    onKeyDown(key) {
+        for (let i = 0; i < this.content.length; i++) {
+            this.content[i].onKeyDown(key);
+        }
+    }
 }
