@@ -92,4 +92,7 @@ class Switch {
             else if(this.angle >= Math.PI/2) this.angle = Math.PI*2;*/
         }
     }
+    onKeyDown(key) {
+    
+    }
 }

@@ -9,6 +9,28 @@ class GameScreen extends Screen {
         this.path = new Path();
         this.containers = new Array();
         this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
+        this.nodeType=[[-1,-1,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0],
+        [2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2],
+        [2,1,0,0,0,2,0,1,0,0,2,0,0,0,1,0,0,0,0,2],
+        [2,1,0,0,0,2,0,1,0,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]]
+        
+        
+        this.nodeTexture=[[ 0, 0,196,192,193,192+32,195,194,194,194,195,192,193,193,193,192+32,194,194,196+32,],
+        [64,66,66,66,67,130,130,130,130,130,131,2,2,2,2,2,132,66,66,64+32],
+        [64,66,66,66,66,4,130,130,130,130,4+32,66,66,66,66,67,130,130,130,128+32],
+        [0,2,2,2,2,132,66,66,66,64+32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        for(let i in this.nodeType){
+            for (let j in this.nodeType[i]){
+                console.log(i,j);
+                if(this.nodeType[i][j] != -1)
+                    this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j]));
+            }
+        }
+        /*this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
+        this.oreBreaker = new OreBreaker(() => {this.focus()});
+        this.content = new Array();
+        this.content.push()
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [this.oreBreaker], () => {}));
         this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
         this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
@@ -20,9 +42,9 @@ class GameScreen extends Screen {
             this.focused = false;
             this.containers[0].active = true;
             this.activeContainerId = 0;
-        }));
+        }));*/
+        this.path.setNodePosition(3,0);
         this.player = new Player();
-
     }
 
     update() {
@@ -38,15 +60,17 @@ class GameScreen extends Screen {
     }
 
     onKeyDown(key) {
-        if(key==13 && !this.keyState[13]){
-            if (this.focused) {
-                this.path.onKeyDown(key);
-            } else {
+        if (this.focused) 
+            this.path.onKeyDown(key, this.keyState)
+        if(key==13 && !this.keyState[13] && !this.focused){
                 this.focus();
-            }
+        }
+        if (this.containers[this.activeContainerId].active) {
+            this.containers[this.activeContainerId].onKeyDown(key);
         }
         this.keyState[key] = true;
     }
+    
 
     onClick(x, y, buttons) {
         super.onClick(x,y,buttons);
@@ -67,6 +91,7 @@ class GameScreen extends Screen {
             this.containers[j].active = false;
         }
     }
+    
     draw() {
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
@@ -86,8 +111,6 @@ class GameScreen extends Screen {
         
         this.path.draw();
         
-
-        
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
         this.player.draw(this.ticks/3.4);
@@ -104,6 +127,5 @@ class GameScreen extends Screen {
         }
 
         ctx.restore();
-
     }
 }

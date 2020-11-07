@@ -1,4 +1,4 @@
-class meassage {
+class Meassage {
     constructor(x, y, width, height, text, textcolor, fontsize, duration) {
         this.x = x;
         this.y = y;
@@ -18,7 +18,7 @@ class meassage {
         ctx.font = this.fontsize + "px 'Press Start 2P'";
         ctx.fillStyle = this.textcolor;
         ctx.textAlign = "center";
-        ctx.fillText(this.text, this.x + this.width / 2, this.y + this.height);
+        ctx.fillText(this.text, this.x + this.width / 2, this.y + this.height/2);
         ctx.restore();
     }
     update() {

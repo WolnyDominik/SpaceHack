@@ -16,7 +16,10 @@ class PathNode {
         ctx.save();
         //ctx.fillStyle = this.color;
         //ctx.fillRect(-32,-64,64,128);
-        ctx.drawImage(tileSet,(this.index%32)*64,Math.floor(this.index/32)*128,64,128,-32,-64,64,128);
+        if(((this.index%64)&32)==32){
+            ctx.scale(-1,1);
+        }
+        ctx.drawImage(tileSet,(this.index%32)*64,Math.floor(this.index/64)*128,64,128,-32,-64,64,128);
         ctx.restore();
     }
 }
