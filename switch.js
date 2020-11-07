@@ -46,4 +46,7 @@ class Switch {
     onMove() {
         
     }
+    onKeyDown(key) {
+    
+    }
 }

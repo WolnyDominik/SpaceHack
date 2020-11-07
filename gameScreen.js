@@ -65,6 +65,9 @@ class GameScreen extends Screen {
         if(key==13 && !this.keyState[13] && !this.focused){
                 this.focus();
         }
+        if (this.containers[this.activeContainerId].active) {
+            this.containers[this.activeContainerId].onKeyDown(key);
+        }
         this.keyState[key] = true;
     }
     
