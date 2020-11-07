@@ -4,7 +4,7 @@ class Path {
         this.position = {x: 0, y: 0};
         this.offset = {x: 0, y: 0};
         this.size = {width: 64, height: 128};
-        this.speed = 200;
+        this.speed = 150;
     }
     getPlayerPosition() {
         return {x: this.position.x*this.size.width+this.offset.x,

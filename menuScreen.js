@@ -9,7 +9,7 @@ class MenuScreen extends Screen {
             screenManager.pushScreen(gameScreen)
         }));
         this.menuBtns.push(new Button(150, 300, 600, 55, "OPTIONS", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-            this.activateContainer(0)
+            
         }));
 
         this.animate = true;
