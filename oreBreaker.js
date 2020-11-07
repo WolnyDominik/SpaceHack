@@ -10,6 +10,7 @@ class OreBreaker {
         this.callback = callback;
         this.tick = 0;
         this.done = false;
+        this.xd = "XD";
         this.audio = new Audio("/src/sound/mine.mp3");
         this.audio.volume = 0.5;
     }
