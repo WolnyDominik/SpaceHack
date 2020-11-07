@@ -50,7 +50,9 @@ class OreBreaker {
     onMove(mouse) {
         
     }
-
+    onKeyDown(key) {
+    
+    }
     draw() {
         ctx.save();
 
