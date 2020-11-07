@@ -10,7 +10,6 @@ class SplashScreen extends Screen {
 
     update() {
         this.ticks++;
-        console.log(this.ticks);
         if(this.ticks > 75)
             if (this.alpha > 0) {
                 this.alpha -= 1/26;
