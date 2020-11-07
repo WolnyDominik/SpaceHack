@@ -6,26 +6,17 @@ class Screen {
         this.keyDown = 83;
         this.keyLeft = 65;
         this.keyRight = 68;
-
-        this.mouseDown = false;
-        this.mouseUp = false;
-
        
     }
 
-    update() {
+    update() {}
 
-    }
-
-    draw() {
-
-    }
+    draw() {}
 
     onClick(x, y, buttons) {
-        console.log("XDDDDD");
         this.mouse.x = x;
         this.mouse.y = y;
-        this.mouse.buttons;
+        this.mouse.buttons = buttons;
         return false;
     }
 
@@ -34,7 +25,8 @@ class Screen {
     }
 
     onMove(x, y) {
-
+        this.mouse.x = x;
+        this.mouse.y = y;
     }
 
     onKeyDown(key) {
@@ -46,8 +38,6 @@ class Screen {
         this.keyState[key] = false;
     }
 
-    pause() {
-        
-    }
+    pause() {}
 
 }

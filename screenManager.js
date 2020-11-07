@@ -12,8 +12,8 @@ class ScreenManager {
 
     popScreen() {
         let tmp = this.screenstack.shift();
-        if (this.screenstack.length > 0)
-            tmp.soundFrame.pause();
+        // if (this.screenstack.length > 0)
+        //     tmp.soundFrame.pause();
         return tmp;
     }
 
@@ -22,13 +22,13 @@ class ScreenManager {
     }
 
     update() {
-        this.current.update();
-        if (this.screenstack.length > 0)
-            this.screenstack[0].soundFrame.update();
+        this.screenstack[0].update();
+        // if (this.screenstack.length > 0)
+        //     this.screenstack[0].soundFrame.update();
     }
 
     draw() {
-        this.screenstack[0].update();
+        this.screenstack[0].draw();
     }
 
     onClick(x , y, button) {
@@ -39,8 +39,8 @@ class ScreenManager {
         this.screenstack[0].onDrag(x, y, button);
     }
 
-    onMove(x, y, button) {
-        this.screenstack[0].onMove(x, y, button);
+    onMove(x, y) {
+        this.screenstack[0].onMove(x, y);
     }
 
     onKeyDown(key) {

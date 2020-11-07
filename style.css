@@ -5,18 +5,18 @@
 }
 body{
     background: #303030;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     min-height: 100vh;
 }
-.titanic{
-    float: false;
-}
 canvas{
-    
-
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
     width: 1280px;
     height:720px;    
     background-color: white;
