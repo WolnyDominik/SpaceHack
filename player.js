@@ -1,7 +1,7 @@
 class Player {
     constructor() {
         this.texture = new Image();
-        this.texture.src = "/src/panziemniaczek.png";
+        this.texture.src = "/src/panziemniaczek2.png";
         this.dir = false;
         this.angle = 0;
     }
