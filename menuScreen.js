@@ -5,7 +5,7 @@ class MenuScreen extends Screen {
         this.image = new Image();
         this.image.src = "/src/img/background.png";
         this.menuBtns = new Array();
-        this.creds = new Container(undefined, undefined, 900, 600, "rgba(128,128,128,255)",0, [ new Creds ( () => {this.focus()} ) ], () => {})
+        this.creds = new Container(undefined, undefined, 900, 600, "rgba(128,128,128,255)",0, [ new Creds ( () => {this.focus()}, 0 ) ], () => {})
         this.player = new Container(undefined, undefined, 1100, 350, "rgba(128,128,128,255)",0, [ new ChoosePlayer ( () => {this.focus()} ) ], () => {})
         this.focused = true;
         this.menuBtns.push(new Button(150, 100, 600, 55, "PLAY", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {

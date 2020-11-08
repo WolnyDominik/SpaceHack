@@ -11,7 +11,7 @@ class GameScreen extends Screen {
 
         this.containers = new Array();
         this.content= new Array();
-        this.content.push();
+        this.finish = new Container(undefined, undefined, 1000, 500, "rgba(128,128,128,255)",0, [ new Creds ( () => {this.focus(); screenManager.popScreen();}, 1 ) ], () => {});
         this.containers.push(new KeyPanel(this.focus));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)",1, [new OreBreaker(() => {this.focus()})], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
@@ -85,6 +85,10 @@ class GameScreen extends Screen {
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].update(this.ticks);
         }
+        if(this.focused && finishedTasks >= 4) {
+            this.focused = false;
+            this.finish.active = true;
+        }
     }
 
     onKeyDown(key) {
@@ -108,6 +112,8 @@ class GameScreen extends Screen {
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].onKeyDown(key);
         }
+        if (this.finish.active)
+            this.finish.onKeyDown(key);
         super.onKeyDown(key)
     }
 
@@ -167,6 +173,8 @@ class GameScreen extends Screen {
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].draw(this.ticks);
         }
+        if (this.finish.active)
+            this.finish.draw();
 
         ctx.restore();
     }

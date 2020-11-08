@@ -66,12 +66,12 @@ class Captcha {
         }
         if (this.answer == this.ocr[0]) {
             this.done = true;
+            finishedTasks++;
             this.ocr = [];
         }
         if (this.done) {
             this.tick += deltaTime;
             if (this.callback && this.tick >= 3) {
-                finishedTasks++;
                 this.done = false;
                 this.callback();
             }
