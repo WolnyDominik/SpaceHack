@@ -141,11 +141,15 @@ class Captcha {
             ctx.fillRect(this.butx2, this.buty2, this.butwidth, this.butheight);
             ctx.fillText("Wymaż", this.butx2 + 15, this.buty2 - 10, this.butwidth + 30, this.butheight);
             if (this.butclicked) {
+                ctx.save()
                 this.buttonclicked = false;
-                ctx.drawImage(canvas, this.x, this.y, this.width, this.height, 0, 0, 28, 28);
-                this.imgs = ctx.getImageData(0, 0, 28, 28);
+                ctx.drawImage(canvas, this.x, this.y, this.width, this.height, this.x-28,this.y-28, 28, 28);
+                this.imgs = ctx.getImageData(this.x-28,this.y-28, 28, 28);
+                ctx.fillStyle= "rgba(3,6,120,255)";
+                ctx.fillRect(this.x-28,this.y-28,28,28);
                 this.ocr = this.predict();
                 console.log(this.ocr);
+                ctx.restore();
             }
 
 
