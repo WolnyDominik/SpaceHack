@@ -50,7 +50,7 @@ class MenuScreen extends Screen {
     focus() {
         this.focused = true;
         this.creds.active = false;
-
+        this.player.active = false;
     }
 
     onMove(x, y, buttons) {
