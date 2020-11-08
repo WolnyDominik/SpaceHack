@@ -41,7 +41,7 @@ class OreBreaker {
                 this.tick = 0;
                 this.audio.play();
             }
-            if (this.completion >= 100) {
+            if (this.completion >= 200) {
                 this.completion = 0;
                 this.tick = 0;
                 this.done = true;
@@ -68,8 +68,10 @@ class OreBreaker {
             ctx.font="24px 'Press Start 2P'";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("Press the button to mine.",this.x+100,this.y-60);
-            ctx.fillText("Collected "+this.completion+"% of the ore.", this.x+100, this.y-20);
+            ctx.fillText("Press the button to ",this.x+100,this.y-60);
+            ctx.fillText("spin up the drill.",this.x+100,this.y-30)
+            ctx.fillText("Current RPM: "+this.completion*40, this.x+100, this.y+230);
+            ctx.fillText("Needed RPM: "+8000, this.x+100, this.y+260);
 
             ctx.restore();
 
