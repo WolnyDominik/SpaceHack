@@ -124,7 +124,7 @@ class GameScreen extends Screen {
 
         ctx.save();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.translate(canvas.width / 2, canvas.height / 2-80);
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         ctx.restore();
         
