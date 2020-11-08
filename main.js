@@ -7,7 +7,7 @@ var deltaTime, now, time = 0,
     
 function main() {
     screenManager = new ScreenManager();
-    gameScreen = new GameScreen();
+    menuScreen = new MenuScreen();
     splashScreen = new SplashScreen();
     screenManager.pushScreen(splashScreen);
     canvas = document.querySelector('canvas');
