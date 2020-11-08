@@ -11,9 +11,9 @@ class GameScreen extends Screen {
         this.containers = new Array();
         this.content= new Array();
         this.content.push();
-        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)", [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
-        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)", [new OreBreaker(() => {this.focus()})], () => {}));
-        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)", [new Hydrogen(0,0,() => {this.focus()})]));
+        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)",0, [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)",1, [new OreBreaker(() => {this.focus()})], () => {}));
+        this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
         this.nodeType=[
             [0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0,0],
             [0,2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2,0],
@@ -33,8 +33,8 @@ class GameScreen extends Screen {
             [133,  0,  2,  2,  2,  2,   0+32, 64, 66, 66,  66,  66,64+32,133,133,133,   133,133,133,   133,   133, 133]];
         
         this.nodeTask=[
-            [-1,-1,-1,-1,-1,-1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 2,-1,-1],
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             [-1,-1,-1,-1,-1, 0,-1,-1,-1,-1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]];
         
