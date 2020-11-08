@@ -39,9 +39,7 @@ class Hydrogen {
             ctx.restore();
         }
     }
-    onClick(mouse) {
-        //  console.log(this.hydrogen + " " + this.oxygen + " " + this.nitrogen);
-    }
+    onClick(mouse) {}
     onMove(mouse) {
 
     }
@@ -76,7 +74,6 @@ class Hydrogen {
     update() {
         if (!this.conscious) {
             this.stun+= deltaTime*10;
-            console.log(this.stun);
         }
         if (this.stun >= 70) {
             this.conscious = true;

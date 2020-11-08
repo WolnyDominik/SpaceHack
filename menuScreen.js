@@ -73,7 +73,6 @@ class MenuScreen extends Screen {
     }
 
     draw() {
-        //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
         ctx.globalAlpha = this.alpha;
         

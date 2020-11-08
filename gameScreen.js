@@ -63,29 +63,11 @@ class GameScreen extends Screen {
             }
         }
         
-        // this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
-        
-        
-        // this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
-        // this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
-        // this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(2, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(3, 0, new PathNode(pathType.WALL,1));
-        // this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(4, 0, new PathNode(pathType.ELEVATORa,2, () => {
-        //     this.focused = false;
-        //     this.containers[1].active = true;
-        //     this.activeContainerId = 1;
-        // }));
         this.path.setNodePosition(4,0);
         this.player = new Player();
     }
 
     update() {
-        //if (!this.focused)
-        //    console.log(this.escblck);
-        //this.ticks++;
         this.ticks += deltaTime*60;
         if (this.focused) {
             this.path.update(this.keyState);
@@ -150,7 +132,6 @@ class GameScreen extends Screen {
     }
     
     draw() {
-        //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
 
         ctx.save();
@@ -171,11 +152,8 @@ class GameScreen extends Screen {
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
         this.player.draw(this.ticks/3.4);
-        //3.4
+        
         ctx.restore();
-        //ctx.fillStyle = "#f00";
-        //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
-        //ctx.fillRect(0,0,20,20);
         
         ctx.restore();
         

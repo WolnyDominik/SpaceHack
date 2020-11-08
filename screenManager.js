@@ -12,8 +12,6 @@ class ScreenManager {
 
     popScreen() {
         let tmp = this.screenstack.shift();
-        // if (this.screenstack.length > 0)
-        //     tmp.soundFrame.pause();
         return tmp;
     }
 
@@ -23,8 +21,6 @@ class ScreenManager {
 
     update() {
         this.screenstack[0].update();
-        // if (this.screenstack.length > 0)
-        //     this.screenstack[0].soundFrame.update();
     }
 
     draw() {

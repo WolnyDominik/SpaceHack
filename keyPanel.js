@@ -31,7 +31,6 @@ class KeyPanel {
         if (this.pressedKey!=-1) {
             ctx.save();
             ctx.translate(104,104);
-            console.log(this.pressedKey);
             ctx.drawImage(keyPanelTexture,360+((this.pressedKey%4)*32),104+(Math.floor(this.pressedKey/4)*32),32,32,((this.pressedKey%4)*32),(Math.floor(this.pressedKey/4)*32),32,32);
             ctx.restore();
         }
@@ -81,7 +80,6 @@ class KeyPanel {
 
     onClick(mouse) {
         let ms = {x: mouse.x-this.offset.x+this.size.width/2, y: mouse.y-this.offset.y+this.size.height/2, buttons: mouse.buttons, prevButtons: mouse.prevButtons};
-        console.log(ms);
         this.switch.onClick(ms);
         
         if (ms.x-104>=0 && ms.x-104<=128 && ms.y-104>=0 && ms.y-104<=128 && (ms.buttons&1)==1 && (ms.prevButtons&1)==0) {

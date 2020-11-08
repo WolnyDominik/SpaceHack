@@ -25,7 +25,6 @@ class Player {
         if (this.angle) ctx.translate(0,-Math.abs(Math.cos(ticks)*jump));
         ctx.rotate(this.angle*Math.sin(ticks));
         if (this.dir) ctx.scale(-1,1);
-        //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.drawImage(this.texture,skinID*64,0,64,64,-32,-64,64,64);
         ctx.restore();
     }

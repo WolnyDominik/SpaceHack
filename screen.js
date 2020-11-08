@@ -27,7 +27,6 @@ class Screen {
     }
 
     onKeyDown(key) {
-        console.log(key);
         this.keyState[key] = true;
     }
 

@@ -7,8 +7,7 @@ var deltaTime, now, time = 0,
     
 function main() {
     screenManager = new ScreenManager();
-    // gameScreen = new GameScreen();
-    menuScreen = new MenuScreen();
+    gameScreen = new GameScreen();
     splashScreen = new SplashScreen();
     screenManager.pushScreen(splashScreen);
     canvas = document.querySelector('canvas');
@@ -30,10 +29,8 @@ function tick() {
     meassageManager();
     requestAnimationFrame(tick);
 }
-console.log("RED SUS");
 main();
 document.onkeydown = function (e) {
-    console.log(e.keyCode);
     screenManager.onKeyDown(e.keyCode);
 }
 
@@ -52,14 +49,11 @@ canvas.onmousemove = function (e) {
 }
 canvas.onmousedown = function (e) {
     e.preventDefault();
-    console.log(e);
     let x = e.clientX - canvas.offsetLeft;
     let y = e.clientY - canvas.offsetTop;
-    console.log(x, y);
     screenManager.onClick(x, y, e.buttons);
 }
 canvas.onmouseup = function (e) {
-    //console.log(e);
     let x = e.clientX - canvas.offsetLeft;
     let y = e.clientY - canvas.offsetTop;
     screenManager.onClick(x, y, e.buttons);
