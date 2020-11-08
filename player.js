@@ -25,7 +25,7 @@ class Player {
         ctx.translate(0,-18);
         ctx.translate(32,64);
         if (this.angle) ctx.translate(0,-Math.abs(Math.cos(ticks)*jump));
-        if (this.angle && (Math.sin(ticks) > 0.95 || Math.sin(ticks) < -0.95))
+        if (this.angle && (Math.sin(ticks*7/8) > 0.95 || Math.sin(ticks*7/8) < -0.95))
             this.step.play()
         ctx.rotate(this.angle*Math.sin(ticks));
         if (this.dir) ctx.scale(-1,1);

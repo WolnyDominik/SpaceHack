@@ -3,7 +3,17 @@ class MenuScreen extends Screen {
         super();
         this.ticks = 0;
         this.image = new Image();
-        this.image.src = "/src/img/background.png";
+        this.image.src = "/src/menu0.png";
+        
+        this.lander = new Image();
+        this.lander.src = "/src/menu1.png";
+        
+        this.fire1 = new Image();
+        this.fire1.src = "/src/menu2.png";
+        
+        this.fire2 = new Image();
+        this.fire2.src = "src/menu3.png";
+        
         this.menuBtns = new Array();
         this.creds = new Container(undefined, undefined, 900, 600, "rgba(128,128,128,255)",0, [ new Creds ( () => {this.focus()}, 0 ) ], () => {})
         this.player = new Container(undefined, undefined, 1100, 350, "rgba(128,128,128,255)",0, [ new ChoosePlayer ( () => {this.focus()} ) ], () => {})
@@ -61,7 +71,7 @@ class MenuScreen extends Screen {
     }
 
     update() {
-        this.ticks++;
+        this.ticks+=deltaTime*60;
         if(this.animate)
             this.y -= this.velocity;
             if(this.y <= 0)
@@ -79,7 +89,13 @@ class MenuScreen extends Screen {
         ctx.save();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        
+        ctx.drawImage(this.image,0,0,this.image.width,this.image.height,-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
+        
+        ctx.drawImage(this.lander,0,0,this.lander.width,this.lander.height,-canvas.width/2,-canvas.height/2+Math.sin(this.ticks/4),canvas.width,canvas.height);
+        if (this.ticks%16>8) ctx.drawImage(this.fire1,0,0,this.fire1.width,this.fire1.height,-canvas.width/2,-canvas.height/2+Math.sin(this.ticks/4),canvas.width,canvas.height);
+        else ctx.drawImage(this.fire2,0,0,this.fire2.width,this.fire2.height,-canvas.width/2,-canvas.height/2+Math.sin(this.ticks/4),canvas.width,canvas.height);
+        
         ctx.restore();
         
         ctx.translate(0, this.y)
