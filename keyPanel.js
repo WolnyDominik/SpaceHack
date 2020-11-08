@@ -13,6 +13,7 @@ class KeyPanel {
         this.fontsize = 35;
         this.callback = callback;
         this.ticks = 0;
+        this.win = false;
     }
     draw(ticks) {
         ctx.save();
@@ -31,7 +32,6 @@ class KeyPanel {
         if (this.pressedKey!=-1) {
             ctx.save();
             ctx.translate(104,104);
-            console.log(this.pressedKey);
             ctx.drawImage(keyPanelTexture,360+((this.pressedKey%4)*32),104+(Math.floor(this.pressedKey/4)*32),32,32,((this.pressedKey%4)*32),(Math.floor(this.pressedKey/4)*32),32,32);
             ctx.restore();
         }
@@ -55,6 +55,7 @@ class KeyPanel {
                 ctx.fillStyle = "#8487d5";
                 ctx.textAlign = "left";
                 ctx.fillText("OK", 36, 76);
+                this.win = true;
             }
         } else {
             ctx.font=this.fontsize+"px 'Press Start 2P'";
@@ -71,6 +72,8 @@ class KeyPanel {
             this.ticks = 0;
         }
         if (this.ticks > 2) {
+            //if (this.win)
+                finishedTasks++;
             screenManager.screenstack[0].focus();
         }
     }
@@ -81,7 +84,6 @@ class KeyPanel {
 
     onClick(mouse) {
         let ms = {x: mouse.x-this.offset.x+this.size.width/2, y: mouse.y-this.offset.y+this.size.height/2, buttons: mouse.buttons, prevButtons: mouse.prevButtons};
-        console.log(ms);
         this.switch.onClick(ms);
         
         if (ms.x-104>=0 && ms.x-104<=128 && ms.y-104>=0 && ms.y-104<=128 && (ms.buttons&1)==1 && (ms.prevButtons&1)==0) {

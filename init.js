@@ -4,12 +4,11 @@ var canvas = document.querySelector('canvas');
     model=null;
     const MODELPATH = "/src/model.json";
     tf.loadLayersModel(MODELPATH).then(function (model_) {
-        console.log("KURWA")
-         model = model_;
+        model = model_;
 
     }).catch(error=>console.log(error));
     
-    var skinID = 0; // golonka | doktor | pyra | bob
+    var skinID = 0;
+    var finishedTasks = 0;
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');  
-console.log("odpala się")

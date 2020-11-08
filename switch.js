@@ -76,7 +76,6 @@ class Switch {
             this.angle %= Math.PI*2;
             if (this.angle<0) this.angle += Math.PI*2;
             
-            console.log(this.angle);
             
             if (this.angle > Math.PI && this.angle < Math.PI*3/2) {
                 this.turning = false;

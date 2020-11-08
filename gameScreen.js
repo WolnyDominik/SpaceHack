@@ -12,7 +12,7 @@ class GameScreen extends Screen {
 
         this.containers = new Array();
         this.content= new Array();
-        this.content.push();
+        this.finish = new Container(undefined, undefined, 1000, 500, "rgba(128,128,128,255)",0, [ new Creds ( () => {this.focus(); screenManager.popScreen();}, 1 ) ], () => {});
         this.containers.push(new KeyPanel(this.focus));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)",1, [new OreBreaker(() => {this.focus()})], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
@@ -55,39 +55,28 @@ class GameScreen extends Screen {
         for(let i in this.nodeType){
             for (let j in this.nodeType[i]){
                 this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j],this.nodeTask[i][j]>=0?()=>{
-                    console.log("ZADANIE ", this.nodeTask[i][j]);
+                    var task = this.nodeTask[i][j];
+                    console.log("ZADANIE ", task);
+                    if (task == 1)
+                        if (!this.containers[task].content[0].done){
+                            this.focused = false;
+                            this.containers[task].active = true;
+                            this.activeContainerId = task;        
+                        }
                     this.focused = false;
-                    console.log(this.containers[this.nodeTask[i][j]]);
-                    this.containers[this.nodeTask[i][j]].active = true;
-                    this.activeContainerId = this.nodeTask[i][j];
+                    this.containers[task].active = true;
+                    this.activeContainerId = task;
                 }:""));
             }
         }
         
-        // this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
-        
-        
-        // this.path.addNode(0, 0, new PathNode(pathType.DEFAULT,2));
-        // this.path.addNode(1, 0, new PathNode(pathType.DEFAULT,2));
-        // this.path.addNode(2, 0, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(2, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(3, 0, new PathNode(pathType.WALL,1));
-        // this.path.addNode(3, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(4, 1, new PathNode(pathType.ELEVATOR,2));
-        // this.path.addNode(4, 0, new PathNode(pathType.ELEVATORa,2, () => {
-        //     this.focused = false;
-        //     this.containers[1].active = true;
-        //     this.activeContainerId = 1;
-        // }));
         this.path.setNodePosition(4,0);
         this.player = new Player();
     }
 
     update() {
-        //if (!this.focused)
-        //    console.log(this.escblck);
-        //this.ticks++;
         this.ticks += deltaTime*60;
+        console.log(finishedTasks);
         if (this.focused) {
             this.path.update(this.keyState);
             this.player.update(this.keyState);
@@ -97,6 +86,10 @@ class GameScreen extends Screen {
         }
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].update(this.ticks);
+        }
+        if(this.focused && finishedTasks >= 4) {
+            this.focused = false;
+            this.finish.active = true;
         }
     }
 
@@ -121,6 +114,8 @@ class GameScreen extends Screen {
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].onKeyDown(key);
         }
+        if (this.finish.active)
+            this.finish.onKeyDown(key);
         super.onKeyDown(key)
     }
 
@@ -152,7 +147,6 @@ class GameScreen extends Screen {
     }
     
     draw() {
-        //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
         ctx.save();
 
         ctx.save();
@@ -177,17 +171,16 @@ class GameScreen extends Screen {
         ctx.save();
         ctx.translate(tmp.x-32,tmp.y);
         this.player.draw(this.ticks/3.4);
-        //3.4
+        
         ctx.restore();
-        //ctx.fillStyle = "#f00";
-        //ctx.fillRect(tmp.x - 10, tmp.y - 10, 20, 20);
-        //ctx.fillRect(0,0,20,20);
         
         ctx.restore();
         
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].draw(this.ticks);
         }
+        if (this.finish.active)
+            this.finish.draw();
 
         ctx.restore();
     }

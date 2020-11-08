@@ -49,7 +49,6 @@ class Container {
 
     update() {
         this.tick++;
-        // console.log(this.tick)
         for (let i = 0; i < this.content.length; i++) {
             if (this.content[i].update)
                 this.content[i].update();

@@ -41,8 +41,7 @@ class Button{
 
     onClick(mouse){
         if (this.checkCoords(mouse.x, mouse.y) &&
-            (mouse.buttons&1) == 1 //&&
-            //(prevButtons&1) == 0
+            (mouse.buttons&1) == 1 
         ) {
             this.activated=true;
             this.clickSound.play();

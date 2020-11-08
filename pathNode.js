@@ -15,8 +15,6 @@ class PathNode {
     }
     draw() {
         ctx.save();
-        //ctx.fillStyle = this.color;
-        //ctx.fillRect(-32,-64,64,128);
         if(((this.index%64)&32)==32){
             ctx.scale(-1,1);
         }
