@@ -4,8 +4,8 @@ class OreBreaker {
         this.image.src = "/src/przycisk.png";
         this.x = 0;
         this.y = 0;
-        this.width = this.image.width/2;
-        this.height = this.image.height;
+        this.width = 200;
+        this.height = 200;
         this.completion = 0;
         this.callback = callback;
         this.tick = 0;
