@@ -9,7 +9,7 @@ class MenuScreen extends Screen {
         this.player = new Container(undefined, undefined, 1100, 350, "rgba(128,128,128,255)",0, [ new ChoosePlayer ( () => {this.focus()} ) ], () => {})
         this.focused = true;
         this.menuBtns.push(new Button(150, 100, 600, 55, "PLAY", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-            screenManager.pushScreen(gameScreen)
+            screenManager.pushScreen(new GameScreen())
         }));
         this.menuBtns.push(new Button(150, 200, 600, 55, "CHOOSE PLAYER", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
             this.player.active = true;
@@ -35,7 +35,7 @@ class MenuScreen extends Screen {
         super.onClick(x, y, buttons);
         if (this.focused)
             for (let j = 0; j < this.menuBtns.length; j++)
-                this.menuBtns[j].onClick(x, y, buttons);
+                this.menuBtns[j].onClick(this.mouse);
         else if (this.player.active)
             this.player.onClick(this.mouse);
             
@@ -50,14 +50,14 @@ class MenuScreen extends Screen {
     focus() {
         this.focused = true;
         this.creds.active = false;
-
+        this.player.active = false;
     }
 
     onMove(x, y, buttons) {
         super.onMove(x, y);
         if (this.focused)
             for (let j = 0; j < this.menuBtns.length; j++)
-                this.menuBtns[j].onMove(x, y);
+                this.menuBtns[j].onMove(this.mouse);
     }
 
     update() {

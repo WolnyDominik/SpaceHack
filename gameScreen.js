@@ -7,14 +7,24 @@ class GameScreen extends Screen {
         this.focused = true;
         this.activeContainerId = 0;
         this.path = new Path();
+        this.escblck = false;
 
         this.containers = new Array();
         this.content= new Array();
         this.content.push();
-        this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)",0, [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
+        this.containers.push(new KeyPanel(this.focus));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)",1, [new OreBreaker(() => {this.focus()})], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Captcha(0,0,() => {this.focus()})]));
+        this.containers.push(new Container(undefined, undefined, 400, 280, "rgba(128,128,128,255)",0, [
+            new Button(0, -50, 300, 70, "RESUME", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+                this.focus();
+            }),
+            new Button(0, 50, 300, 70, "EXIT", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
+                this.focus();
+                screenManager.popScreen();
+            })
+        ]));
         this.nodeType=[
             [0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0,0],
             [0,2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2,0],
@@ -74,8 +84,9 @@ class GameScreen extends Screen {
 
     update() {
         //if (!this.focused)
-        //    console.log("ASDASDASDASSAD");
-        this.ticks++;
+        //    console.log(this.escblck);
+        //this.ticks++;
+        this.ticks += deltaTime*60;
         if (this.focused) {
             this.path.update(this.keyState);
             this.player.update(this.keyState);
@@ -83,21 +94,40 @@ class GameScreen extends Screen {
             this.player.update([]);
         }
         if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].update();
+            this.containers[this.activeContainerId].update(this.ticks);
         }
     }
 
     onKeyDown(key) {
-        if (this.focused) this.path.onKeyDown(key, this.keyState)
+        if (!this.focused && !this.escblck)
+            if (key == 27 && this.activeContainerId == 4){
+                this.escblck = true;
+                this.focus();
+            }
+        if (this.focused) {
+            if (key == 27 && !this.escblck) {
+                this.escblck = true;
+                this.focused = false;
+                this.containers[4].active = true;
+                this.activeContainerId = 4;
+            }
+            this.path.onKeyDown(key, this.keyState)
+        }
         else if(key==13 && !this.keyState[13] && !this.focused){
                 this.focus();
         }
         if (this.containers[this.activeContainerId].active) {
             this.containers[this.activeContainerId].onKeyDown(key);
         }
-        this.keyState[key] = true;
+        super.onKeyDown(key)
     }
-    
+
+    onKeyUp(key) {
+        super.onKeyUp(key);
+        if (key == 27) {
+            this.escblck = false;
+        }
+    }
 
     onClick(x, y, buttons) {
         super.onClick(x,y,buttons);
@@ -150,7 +180,7 @@ class GameScreen extends Screen {
         ctx.restore();
         
         if (this.containers[this.activeContainerId].active) {
-            this.containers[this.activeContainerId].draw();
+            this.containers[this.activeContainerId].draw(this.ticks);
         }
 
         ctx.restore();
