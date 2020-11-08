@@ -9,5 +9,6 @@ var canvas = document.querySelector('canvas');
     }).catch(error=>console.log(error));
     
     var skinID = 0;
+    var finishedTasks = 0;
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');  

@@ -13,6 +13,7 @@ class KeyPanel {
         this.fontsize = 35;
         this.callback = callback;
         this.ticks = 0;
+        this.win = false;
     }
     draw(ticks) {
         ctx.save();
@@ -54,6 +55,7 @@ class KeyPanel {
                 ctx.fillStyle = "#8487d5";
                 ctx.textAlign = "left";
                 ctx.fillText("OK", 36, 76);
+                this.win = true;
             }
         } else {
             ctx.font=this.fontsize+"px 'Press Start 2P'";
@@ -70,6 +72,8 @@ class KeyPanel {
             this.ticks = 0;
         }
         if (this.ticks > 2) {
+            //if (this.win)
+                finishedTasks++;
             screenManager.screenstack[0].focus();
         }
     }

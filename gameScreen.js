@@ -54,11 +54,17 @@ class GameScreen extends Screen {
         for(let i in this.nodeType){
             for (let j in this.nodeType[i]){
                 this.path.addNode(j,i,new PathNode(this.nodeType[i][j],this.nodeTexture[i][j],this.nodeMachine[i][j],this.nodeTask[i][j]>=0?()=>{
-                    console.log("ZADANIE ", this.nodeTask[i][j]);
+                    var task = this.nodeTask[i][j];
+                    console.log("ZADANIE ", task);
+                    if (task == 1)
+                        if (!this.containers[task].content[0].done){
+                            this.focused = false;
+                            this.containers[task].active = true;
+                            this.activeContainerId = task;        
+                        }
                     this.focused = false;
-                    console.log(this.containers[this.nodeTask[i][j]]);
-                    this.containers[this.nodeTask[i][j]].active = true;
-                    this.activeContainerId = this.nodeTask[i][j];
+                    this.containers[task].active = true;
+                    this.activeContainerId = task;
                 }:""));
             }
         }
@@ -69,6 +75,7 @@ class GameScreen extends Screen {
 
     update() {
         this.ticks += deltaTime*60;
+        console.log(finishedTasks);
         if (this.focused) {
             this.path.update(this.keyState);
             this.player.update(this.keyState);

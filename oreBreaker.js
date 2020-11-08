@@ -13,6 +13,7 @@ class OreBreaker {
         this.audio = new Audio("/src/sound/mine.mp3");
         this.audio.volume = 0.5;
         this.clicked=false;
+        this.points = true;
     }
 
     update() {
@@ -22,7 +23,11 @@ class OreBreaker {
         if (this.done) {
             if (this.callback && this.tick >= 120) {
                 this.tick = 0;
-                this.done = false;
+                if (this.done && this.points){
+                    finishedTasks++;
+                    this.points = false;
+                }
+
                 this.callback();
             }
         }

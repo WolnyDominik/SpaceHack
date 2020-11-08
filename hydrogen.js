@@ -24,6 +24,7 @@ class Hydrogen {
 
         this.textcolor = "rgba(255,255,255,255)";
         this.fontsize = 20;
+        this.added = false;
     }
     draw() {
         this.text = "level of:\n" + "wodór: " + this.hydrogen + "%\ntlen: " + this.oxygen + "%\nazot: " + this.nitrogen + "%\nbezpiecznie naciśnij 'b'" + "\nnie bezpiecznie naciśnij 'n'";
@@ -90,7 +91,11 @@ class Hydrogen {
             }
         }
         if (this.done && this.thick >= 100) {
-            this.done = false;
+            // this.done = false;
+            if(!this.added){ 
+                finishedTasks++;
+                this.added = true;
+            }
             this.callback();
         }
     }
