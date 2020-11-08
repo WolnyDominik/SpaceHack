@@ -14,6 +14,7 @@ class GameScreen extends Screen {
         this.containers.push(new Container(undefined, undefined, 500, 200, "rgba(255,100,255,255)",0, [new Switch(0,0,switchType.KEYSOCKET)], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(128,128,128,255)",1, [new OreBreaker(() => {this.focus()})], () => {}));
         this.containers.push(new Container(undefined, undefined, 800, 400, "rgba(3,6,120,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
+        this.containers.push(new Container(undefined, undefined, 280, 280, "rgba(255,255,255,255)",1, [new Hydrogen(0,0,() => {this.focus()})]));
         this.nodeType=[
             [0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,2,0,0],
             [0,2,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,2,1,0,2,0],
@@ -23,7 +24,7 @@ class GameScreen extends Screen {
         this.nodeMachine=[
             [-1,-1,-1,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,-1,-1,-1,-1,-1, 5,-1,-1,-1],
             [-1,-1, 5,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,-1,-1, 5,-1,-1, 5,69,-1,-1],
-            [-1,-1, 5,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,-1,-1, 5,-1,-1,-1,-1,-1,-1],
+            [-1,-1, 5,-1,-1,-1,-1,-1,5,-1,-1,-1,-1,72,-1, 5,-1,-1,-1,-1,-1,-1],
             [-1,-1, 5,-1,-1,70,-1,-1,5,-1,-1,71,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]]
         
         this.nodeTexture=[
@@ -35,7 +36,7 @@ class GameScreen extends Screen {
         this.nodeTask=[
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
             [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 2,-1,-1],
-            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+            [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 3,-1,-1,-1,-1,-1,-1,-1,-1],
             [-1,-1,-1,-1,-1, 0,-1,-1,-1,-1,-1, 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]];
         
         console.log(this.containers);
@@ -124,7 +125,7 @@ class GameScreen extends Screen {
 
         ctx.save();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(canvas.width / 2, canvas.height / 2-80);
+        ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
         ctx.restore();
         
