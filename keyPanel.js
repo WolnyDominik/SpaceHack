@@ -14,6 +14,7 @@ class KeyPanel {
         this.callback = callback;
         this.ticks = 0;
         this.win = false;
+        this.pointsAdded=false;
     }
     draw(ticks) {
         ctx.save();
@@ -72,8 +73,9 @@ class KeyPanel {
             this.ticks = 0;
         }
         if (this.ticks > 2) {
-            //if (this.win)
+            if (!this.pointsAdded){
                 finishedTasks++;
+                this.pointsAdded=true;}
             screenManager.screenstack[0].focus();
         }
     }
