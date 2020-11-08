@@ -1,18 +1,18 @@
 class OreBreaker {
     constructor(callback) {
         this.image = new Image();
-        this.image.src = "/src/img/diax.png";
+        this.image.src = "/src/przycisk.png";
         this.x = 0;
         this.y = 0;
-        this.width = this.image.width;
-        this.height = this.image.height;
+        this.width = 200;
+        this.height = 200;
         this.completion = 0;
         this.callback = callback;
         this.tick = 0;
         this.done = false;
-        this.xd = "XD";
         this.audio = new Audio("/src/sound/mine.mp3");
         this.audio.volume = 0.5;
+        this.clicked=false;
     }
 
     update() {
@@ -33,18 +33,22 @@ class OreBreaker {
             mouse.x < this.x + this.width && 
             mouse.y > this.y && 
             mouse.y < this.y + this.height &&
-            mouse.buttons&1 == 1 
+            (mouse.buttons&1) == 1 
         ){
+            this.clicked =true;
             if (!this.done) {
                 this.completion += 20;
                 this.tick = 0;
                 this.audio.play();
             }
-            if (this.completion >= 100) {
+            if (this.completion >= 200) {
                 this.completion = 0;
                 this.tick = 0;
                 this.done = true;
             }
+        }
+        else if ( (mouse.buttons&1)==0) {
+            this.clicked =false;
         }
     }
 
@@ -64,12 +68,15 @@ class OreBreaker {
             ctx.font="24px 'Press Start 2P'";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText(this.completion+"%", this.x-190, this.y);
+            ctx.fillText("Press the button to ",this.x+100,this.y-60);
+            ctx.fillText("spin up the drill.",this.x+100,this.y-30)
+            ctx.fillText("Current RPM: "+this.completion*40, this.x+100, this.y+230);
+            ctx.fillText("Needed RPM: "+8000, this.x+100, this.y+260);
 
             ctx.restore();
 
             ctx.drawImage(
-                this.image, 0,0, 
+                this.image, this.clicked?200:0,0, 
                 this.width, this.height, 
                 this.x, this.y,
                 this.width, this.height

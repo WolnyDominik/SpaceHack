@@ -59,7 +59,7 @@ class Hydrogen {
                     this.conscious = true;
                     this.thick = 80;
                 } else {
-                    meassages.push(new Meassage((canvas.width - 300) / 2, (canvas.height - 128) / 2, 300, 128, "Jesteś nieprzytomny!", "rgba(255,0,0,255)", this.fontsize, 7));
+                    meassages.push(new Meassage((canvas.width - 500) / 2, (canvas.height - 128) / 2, 500, 128, "Jesteś nieprzytomny!", "rgba(255,0,0,255)", this.fontsize, 7));
                     this.conscious = false;
                     this.hydrogen -= 10;
                 }

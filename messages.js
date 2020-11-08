@@ -24,8 +24,6 @@ class Meassage {
     update() {
         this.draw();
     }
-
-
 }
 
 function meassageManager() {
