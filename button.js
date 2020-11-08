@@ -39,16 +39,16 @@ class Button{
         ctx.restore()
     }
 
-    onClick(x, y, buttons){
-        if (this.checkCoords(x, y) &&
-            (buttons&1) == 1 //&&
+    onClick(mouse){
+        if (this.checkCoords(mouse.x, mouse.y) &&
+            (mouse.buttons&1) == 1 //&&
             //(prevButtons&1) == 0
         ) {
             this.activated=true;
             this.clickSound.play();
             if (this.callback) this.callback();
         }
-        else if ((buttons&1) == 0){
+        else if ((mouse.buttons&1) == 0){
             this.activated=false;
         }
     }
@@ -61,8 +61,8 @@ class Button{
         );
     }
 
-    onMove(x, y, buttons) {
-        this.hover = this.checkCoords(x, y);
+    onMove(mouse) {
+        this.hover = this.checkCoords(mouse.x, mouse.y);
         if (!this.hover)
             this.activated = false;
     }
