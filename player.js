@@ -1,7 +1,7 @@
 class Player {
     constructor() {
         this.texture = new Image();
-        this.texture.src = "/src/panziemniaczek2.png";
+        this.texture.src = "/src/ziemniaczki.png";
         this.dir = false;
         this.angle = 0;
     }
@@ -26,7 +26,7 @@ class Player {
         ctx.rotate(this.angle*Math.sin(ticks));
         if (this.dir) ctx.scale(-1,1);
         //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-        ctx.drawImage(this.texture,0,0,64,64,-32,-64,64,64);
+        ctx.drawImage(this.texture,skinID*64,0,64,64,-32,-64,64,64);
         ctx.restore();
     }
 }

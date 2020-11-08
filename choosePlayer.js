@@ -46,16 +46,16 @@ class ChoosePlayer {
 
     onClick(mouse) {
         if (this.checkCoords(mouse.x, mouse.y, 0)) {
-            playerName = "golonka";
+            skinID = 0;
             this.callback();
         } else if (this.checkCoords(mouse.x, mouse.y, 1)) {
-            playerName = "doktor";
+            skinID = 1;
             this.callback();
         } else if (this.checkCoords(mouse.x, mouse.y, 2)) {
-            playerName = "pyra";
+            skinID = 2;
             this.callback();
         } else if (this.checkCoords(mouse.x, mouse.y, 3)) {
-            playerName = "bob";
+            skinID = 3;
             this.callback();
         }
     }
