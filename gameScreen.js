@@ -8,6 +8,7 @@ class GameScreen extends Screen {
         this.activeContainerId = 0;
         this.path = new Path();
         this.escblck = false;
+        this.parallax = new Parallax();
 
         this.containers = new Array();
         this.content= new Array();
@@ -90,6 +91,7 @@ class GameScreen extends Screen {
         if (this.focused) {
             this.path.update(this.keyState);
             this.player.update(this.keyState);
+            this.parallax.update(this.path.getPlayerPosition());
         } else {
             this.player.update([]);
         }
@@ -154,9 +156,13 @@ class GameScreen extends Screen {
         ctx.save();
 
         ctx.save();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.translate(canvas.width / 2, canvas.height / 2);
+        //ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        ctx.translate(canvas.width/3*2, canvas.height/8);
+        this.parallax.draw(this.ticks);
         ctx.restore();
         
         ctx.save();
