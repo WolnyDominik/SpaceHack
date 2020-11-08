@@ -6,13 +6,14 @@ class MenuScreen extends Screen {
         this.image.src = "/src/img/background.png";
         this.menuBtns = new Array();
         this.creds = new Container(undefined, undefined, 900, 600, "rgba(128,128,128,255)", [ new Creds ( () => {this.focus()} ) ], () => {})
+        this.player = new Container(undefined, undefined, 1100, 350, "rgba(128,128,128,255)", [ new ChoosePlayer ( () => {this.focus()} ) ], () => {})
         this.focused = true;
         this.menuBtns.push(new Button(150, 100, 600, 55, "PLAY", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
             screenManager.pushScreen(gameScreen)
         }));
         this.menuBtns.push(new Button(150, 200, 600, 55, "CHOOSE PLAYER", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
-            // this.creds.active = true;
-            // this.focused = false;
+            this.player.active = true;
+            this.focused = false;
         }));
         this.menuBtns.push(new Button(150, 300, 600, 55, "CREDITS", "rgba(70,100,168,255)", "rgba(90,120,188,255)", "rgba(240,128,0,255)", "rgba(255,255,255,225", 40, () => {
             this.focused = false;
@@ -35,6 +36,9 @@ class MenuScreen extends Screen {
         if (this.focused)
             for (let j = 0; j < this.menuBtns.length; j++)
                 this.menuBtns[j].onClick(x, y, buttons);
+        else if (this.player.active)
+            this.player.onClick(this.mouse);
+            
     }
 
     onKeyDown(key) {
@@ -84,8 +88,10 @@ class MenuScreen extends Screen {
             this.menuBtns[j].draw();
         }
 
-        if (!this.focused)
+        if (!this.focused && this.creds.active)
             this.creds.draw();
+        if (!this.focused && this.player.active)
+            this.player.draw();
         ctx.restore();
 
     }
